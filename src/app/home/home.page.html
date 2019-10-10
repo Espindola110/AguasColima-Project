@@ -1,0 +1,45 @@
+<ion-header translucent>
+  <ion-toolbar color="danger">
+    <ion-title>
+      Flood Light
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="masters">
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content>
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <ion-list>
+        <ion-item button (click)="goAnOtherPage(admin)" *ngFor="let data of (sensors | async)" href="/admin">
+            <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 100 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 000 '>
+              <img
+                src="https://www.bresser.de/out/pictures/generated/product/1/460_460_70/d624e08124fd275bb2e4ed5bda1077e6_361112054_1.jpg">
+          </ion-avatar >
+          <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 110'>
+              <img
+                src="http://significadodeloscolores.info/wp-content/uploads/2014/08/color-amarillo.png  ">
+          </ion-avatar >
+          <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 111'>
+              <img
+                src="https://bangbranding.com/blog/wp-content/uploads/2016/09/700x511_SliderInterior.jpg">
+          </ion-avatar >
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+            <h2 class="text-dark"> {{ data.nombre }} </h2>
+            <h3>{{ data.municipio }}</h3>
+          </ion-label>
+          <div>
+            <ion-toggle disabled color="success" [(ngModel)]="sens"></ion-toggle>
+          </div>
+        </ion-item>
+      </ion-list>
+
+
+
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
