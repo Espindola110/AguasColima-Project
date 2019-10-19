@@ -1,5 +1,7 @@
 {
   "name": "SemaforoInteligente",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

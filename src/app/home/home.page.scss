@@ -1,3 +1,62 @@
-.toggle-ios-secondary.toggle-checked .toggle-icon {
-    background-color: #32db64;
+my-component {
+    background:#ffffff;
+ }
+ion-refresher {
+    background-color: #ffffff;
+  }
+ion-refresher-content {
+    background-color: #ffffff;
+  }
+.txtresp{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 400px;
+    color: #000;
+    display: flex;
+    flex-grow: 1;
+    font-weight: 400px;
+    font-size: 1.1rem;
+    line-height: 21px;
+    overflow: hidden;
+  }
+
+  .circulo-verde {
+    width: 36px;
+    height: 36px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #5cb85c;
+}
+.circulo-amarillo {
+  width: 36px;
+  height: 36px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #f8ea12;
+}
+.circulo-rojo {
+  width: 36px;
+  height: 36px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #e61919;
+}
+.dosis{
+font-family: 'Dosis', sans-serif;
+}
+html[dir=ltr] .sz {
+  margin-left: 6px;
+}
+.sz{
+  font-size: .9rem;
+  line-height: 14px;
+}
+.container {
+  align-items: center;
+  line-height: normal;
+  display: flex;
 }
