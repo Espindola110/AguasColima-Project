@@ -11,6 +11,7 @@ export class ApiService {
     return this.http.get('https://semaforosinteligentes.000webhostapp.com/sensores/index.php');
   }
   getSensor(id) {
+    console.log(`${id}`);
     return this.http.get(`https://semaforosinteligentes.000webhostapp.com/sensores/api/index.php?%20idsensor=${id}`);
   }
 }

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ActionSheetController, Platform, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../services/api.service'
-import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 
@@ -23,56 +23,45 @@ export class HomePage {
   sensor:any;
   isFavorite = false;
   idControl = null;
-  constructor(private plt: Platform, private favoriteService: FavoriteService ,private api: ApiService, 
+  data2:any;
+  constructor(private alertCtrl: AlertController, private plt: Platform, private favoriteService: FavoriteService ,private api: ApiService, 
     private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, 
-    public actionSheetController: ActionSheetController, private AlertCtrl: AlertController, private localNotifications: LocalNotifications ) {
-      this.plt.ready().then(() => {
-        this.localNotifications.on('trigger').subscribe(res => {
-          let msg = res.data ? res.data.mydata : '';
-          this.showAlert(res.title, res.text, msg);
-        });
-      });
-     }
-  scheduleNotification(data){
-    if(data.sensor1 + data.sensor2 + data.sensor3 == 2){
-      this.localNotifications.schedule({
-        id: data.idControl,
-        title: data.nombre,
-        text: 'Alerta, vialidad den proceso de inundación',
-        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND },
-      });
-    }else if (data.sensor1 + data.sensor2 + data.sensor3 == 3){
-      this.localNotifications.schedule({
-        id: data.idControl,
-        title: data.nombre,
-        text: 'Precaucion, Vialidad inundada',
-        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND },
-      });
-    }
-    
-  }
-  showAlert(header, sub, msg){
-    this.AlertCtrl.create({
-      header: header,
-      subHeader: sub,
-      message: msg,
-      buttons: ['Ok']
-    }).then(alert =>alert.present());
-  }
+    public actionSheetController: ActionSheetController, private localNotifications: LocalNotifications ) {}
+  
   ngOnInit() {
     this.idControl = this.activatedRoute.snapshot.paramMap.get('id');
     this.api.getSensor(this.idControl).subscribe(res => {
       this.sensor = res;
     });
+    
  
     this.favoriteService.isFavorite(this.idControl).then(isFav => {
       this.isFavorite = isFav;
     });
-  
-    setInterval(()=> {
-      this.sensors = this.http.get(this.url); },4000); 
-      this.sensors.subscribe(data => {
-      this.items = data;
+
+    this.sensors = this.http.get(this.url); 
+    this.sensors.subscribe(data => {
+        this.items = data;
+      });
+
+    var timer = setInterval(()=> {
+      const newdata = this.http.get(this.url); 
+    newdata.subscribe(nwdata => {
+        this.data2 = nwdata;
+      });
+      if (this.items !== this.data2){
+        this.simpleNotif(this.items);
+      }else if (this.items == this.data2){
+
+      }
+  },4000); 
+  }
+
+  simpleNotif(res) {
+    this.localNotifications.schedule({
+      id: res.idControl,
+      text: res.nombre + 'en proceso de inundación',
+      data: { mydata: 'buenas' },
     });
   }
 
@@ -97,29 +86,48 @@ export class HomePage {
   }
   async presentActionSheet(data){
     let flag;
-    const actionSheet = await this.actionSheetController.create({
-      header:  data.nombre,
-      buttons: [{
-        text: 'Favorito',
-        icon: 'heart',
-        handler: () => {
-          if(this.isFavorite){
-            this.unfavoriteSensor();
-            icon: 'heart-outline'
-          }else{
-            this.favoriteSensor();
-          }
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
+if (this.isFavorite){
+  const actionSheet = await this.actionSheetController.create({
+    header:  data.nombre,
+    subHeader: data.municipio,
+    buttons: [{
+      text: 'Desactivar Notificaciones',
+      icon: 'heart',
+      handler: () => {
+          this.unfavoriteSensor();
+          console.log("works!");
+      }
+    }, {
+      text: 'Cancel',
+      icon: 'close',
+      role: 'cancel',
+      handler: () => {
+      }
+    }]
+  });
+  await actionSheet.present();
+}else{
+  const actionSheet = await this.actionSheetController.create({
+    header:  data.nombre,
+    subHeader: data.municipio,
+    buttons: [{
+      text: 'Activar Notificaciones',
+      icon: 'heart',
+      handler: () => {
+          this.favoriteSensor();
+          console.log("asiesworks!");
+      }
+    }, {
+      text: 'Cancel',
+      icon: 'close',
+      role: 'cancel',
+      handler: () => {
+        console.log("works!no");
+      }
+    }]
+  });
+  await actionSheet.present();
+}
   }
 
 }
