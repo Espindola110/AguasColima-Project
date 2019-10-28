@@ -6,10 +6,6 @@ import { RouterModule, Router } from '@angular/router';
 
 import { HomePage } from './home.page';
 
-
-
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +24,5 @@ export class HomePageModule {
   constructor(private router: Router){}
     go(){
       this.router.navigate(['admin'])
-    }
-  
+    } 
 }
-
