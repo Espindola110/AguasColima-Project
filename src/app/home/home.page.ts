@@ -34,14 +34,14 @@ export class HomePage {
     });
 
     const timer = setInterval(async () => {
-      const newdata = this.http.get(this.url);
-
-      newdata.subscribe(nwdata => {
-        this.data2 = nwdata;
+      await new Promise((resolve, reject) => {
+        this.http.get(this.url).subscribe(newData => {
+          this.data2 = newData || [];
+          resolve(newData);
+        });
       });
 
       const isEqual = equal(this.items, this.data2)
-
       if (isEqual) return
 
       const favorites = await Promise.all(this.data2.filter(async ({ idcontrol }) => await this.favoriteService.isFavorite(idcontrol)));
@@ -82,7 +82,7 @@ export class HomePage {
 
   async presentActionSheet(data) {
     // let flag;
-    
+
     const idControl = data.idcontrol;
     const isFavorite = await this.favoriteService.isFavorite(idControl);
 
