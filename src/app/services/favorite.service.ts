@@ -24,6 +24,7 @@ export class FavoriteService {
     return this.getAllFavoriteSensors().then(result => {
       if (result) {
         result.push(idControl);
+        console.log(result, idControl)
         return this.storage.set(STORAGE_KEY, result);
       } else {
         return this.storage.set(STORAGE_KEY, [idControl]);
