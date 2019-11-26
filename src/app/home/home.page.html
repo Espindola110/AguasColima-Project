@@ -1,39 +1,35 @@
 <ion-header translucent>
-  <ion-toolbar color="dark">
-    <ion-title class="dosis" title="Aguas Colima!">
+    <ion-title class="dosis" title="Aguas Colima!" text-center>
       ¡Aguas Colima!
     </ion-title>
-  </ion-toolbar>
 </ion-header>
 <ion-content class="masters">
-      <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content
-          pullingIcon="sync"
-          pullingText="Suelta para actualizar contenido"
-          refreshingSpinner="dots">
-        </ion-refresher-content>
-      </ion-refresher>
-      <ion-list>
-        <div *ngFor="let data of (sensors | async)">
-        <ion-item button (click)="presentActionSheet(data)" >
-            <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 100 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 000|| (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 010 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 101 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 001 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 011' >
-                <div class="circulo-verde"></div>
-          </ion-avatar >
-          <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 110'>
-              <div class="circulo-amarillo"></div>
-          </ion-avatar >
-          <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 111'>
-              <div class="circulo-rojo"></div>
-          </ion-avatar>
-          <ion-label  class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" >
-            <div class="container">
-                <div class="txtresp">
-                  <h3 slot="center" class="">{{data.nombre}}</h3>
-                </div>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="sync" pullingText="Suelta para actualizar contenido" refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <div *ngFor="let data of (sensors | async)">
+      <ion-item button (click)="presentActionSheet(data)">
+        <ion-avatar slot="start"
+          *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 100 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 000|| (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 010 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 101 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 001 || (data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 011'>
+          <div class="circulo-verde"></div>
+        </ion-avatar>
+        <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 110'>
+          <div class="circulo-amarillo"></div>
+        </ion-avatar>
+        <ion-avatar slot="start" *ngIf='(data.sensor1 + "" + data.sensor2+ "" + data.sensor3) == 111'>
+          <div class="circulo-rojo"></div>
+        </ion-avatar>
+        <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+          <div class="container">
+            <div class="txtresp">
+              <div slot="center" class="">{{data.nombre}}</div>
             </div>
-            <p>{{data.municipio}}</p>
-          </ion-label>
-        </ion-item>
-      </div>
-      </ion-list>
+          </div>
+          <p>{{data.municipio}}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>
