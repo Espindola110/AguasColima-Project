@@ -7,6 +7,15 @@ ion-refresher {
 ion-refresher-content {
     background-color: #ffffff;
   }
+
+ion-item  {
+  background-color: transparent;
+  //background-image: url('https://wallpaperaccess.com/full/696182.jpg');
+  //background-repeat: no-repeat;
+  //background-size:cover;
+}
+
+
 .txtresp{
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -16,37 +25,38 @@ ion-refresher-content {
     display: flex;
     flex-grow: 1;
     font-weight: 400px;
-    font-size: 1.1rem;
+    font-size: 20px;
     line-height: 21px;
     overflow: hidden;
   }
 
   .circulo-verde {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     background: #5cb85c;
 }
 .circulo-amarillo {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   background: #f8ea12;
 }
 .circulo-rojo {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   background: #e61919;
 }
 .dosis{
-font-family: 'Dosis', sans-serif;
+  font-family: 'Anton', sans-serif;
+  font-size: 40px;
 }
 html[dir=ltr] .sz {
   margin-left: 6px;

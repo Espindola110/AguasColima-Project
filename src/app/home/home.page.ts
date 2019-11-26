@@ -82,7 +82,7 @@ export class HomePage {
         id: res.idcontrol,
         text: res.nombre + ' Vialidad Inundada',
         smallIcon: 'https://www.stickpng.com/assets/images/58afdad6829958a978a4a693.png',
-        icon: 'https://previews.123rf.com/images/nikdoorg/nikdoorg1511/nikdoorg151100027/47920820-s%C3%ADmbolo-del-sem%C3%A1foro.jpg',
+        icon: 'https://pngimage.net/wp-content/uploads/2018/06/semaforo-png-3.png',
         data: { mydata: 'buenas' }
       });
     } else if (res.sensor1 + res.sensor2 + res.sensor3 == '110'){
@@ -137,7 +137,7 @@ export class HomePage {
             console.log("works!");
           }
         }, {
-          text: 'Cancel',
+          text: 'Cancelar',
           icon: 'close',
           role: 'cancel',
           handler: () => {
@@ -157,7 +157,7 @@ export class HomePage {
             console.log("asiesworks!");
           }
         }, {
-          text: 'Cancel',
+          text: 'Cancelar',
           icon: 'close',
           role: 'cancel',
           handler: () => {
